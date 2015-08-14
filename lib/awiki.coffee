@@ -88,7 +88,13 @@ module.exports = Awiki =
       token.value if token.value and token.scopes.indexOf('string.other.link.wiki') > -1
 
   fixLinkName: (linkName) ->
-    linkName.replace /(\[+|]+)/g, ""
+    linkName = linkName.replace /(\[+|]+)/g, ""
+
+    delimiterIndex = linkName.indexOf('|')
+    if delimiterIndex > -1
+      linkName = linkName.slice(0, delimiterIndex)
+
+    return linkName
 
   #file functions
 

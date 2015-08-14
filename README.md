@@ -2,4 +2,24 @@
 
 A personal wiki for Atom.
 
-![A screenshot of your package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
+This project is based on the vimwiki package for vim, and strives for, at the minimum, basic compatibility with that package, meaning you should be able to point your awiki index to your vimwiki index and it should work just fine!
+
+## Note this is probably only compatible with Windows at the moment
+
+This will be fixed as soon as possible.
+
+## Features
+
+### Wiki index page
+
+Currently, awiki supports only one wiki, which can be specified in the settings page. Pressing `alt-w` will open your wiki's index location. This can also be accessed from the main menu under Packages/Awiki/Open Wiki index
+
+### Links
+
+Links are created by surrounding a word with a set of brackets like so:
+```
+[[Link to another wiki page]]
+```
+You can follow this link by putting the cursor on the link and hitting `alt-enter`. You can also follow it by right-clicking on it and selecting "Open Wiki Link".
+
+You can navigate back to the previous page by pressing `alt-backspace`.

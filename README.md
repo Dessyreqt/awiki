@@ -16,6 +16,8 @@ Links are created by surrounding a word with a set of brackets like so:
 ```
 [[Link to another wiki page]]
 ```
+This can be done automatically by pressing `alt-enter` on a word or a selection.
+
 You can also create a link with a description like so:
 ```
 [[destination|description of the link that will look better in HTML]]

@@ -7,7 +7,7 @@
   "activationCommands": {
     "atom-workspace": [
       "awiki:openWikiIndex",
-      "awiki:openWikiLink",
+      "awiki:openOrCreateWikiLink",
       "awiki:gotoLastWikiPage"
     ]
   },

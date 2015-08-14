@@ -20,7 +20,7 @@ module.exports = Awiki =
     @subscriptions = new CompositeDisposable
 
     # Register command that toggles this view
-    @subscriptions.add atom.commands.add 'atom-workspace', 'awiki:openWikiLink': => @openWikiLink()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'awiki:openOrCreateWikiLink': => @openOrCreateWikiLink()
     @subscriptions.add atom.commands.add 'atom-workspace', 'awiki:gotoLastWikiPage': => @gotoLastWikiPage()
     @subscriptions.add atom.commands.add 'atom-workspace', 'awiki:openWikiIndex': => @openWikiIndex()
 
@@ -42,7 +42,7 @@ module.exports = Awiki =
     if editor.getGrammar().scopeName is 'source.wiki'
       @history.push(editor.getPath())
       newPath = @getFile(editor, link)
-      @openOrCreate(newPath)
+      atom.workspace.open(newPath)
 
   gotoLastWikiPage: ->
     if @history.length > 0
@@ -54,6 +54,32 @@ module.exports = Awiki =
     indexDirectory = atom.config.get("awiki.wikiLocation")
     indexPath = "#{indexDirectory}index.wiki"
     atom.workspace.open(indexPath)
+
+  openOrCreateWikiLink: ->
+    editor = atom.workspace.getActiveTextEditor()
+    return unless editor?
+
+    link = @linkUnderCursor(editor)
+    return @openWikiLink() if link?
+
+    @createWikiLink(editor)
+
+  createWikiLink: (editor) ->
+    selectedText = editor.getSelectedText()
+
+    if selectedText == ''
+      selectedText = editor.getWordUnderCursor()
+      currentPosition = editor.getCursorBufferPosition()
+      editor.transact(0, ->
+        editor.deleteToBeginningOfWord()
+        editor.deleteToEndOfWord()
+        editor.insertText("[[#{selectedText}]]")
+        editor.setCursorBufferPosition([currentPosition.row, currentPosition.column + 2])
+      )
+    else
+      selectedRange = editor.getSelectedBufferRange()
+      editor.insertText("[[#{selectedText}]]")
+      editor.setSelectedBufferRange([[selectedRange.start.row, selectedRange.start.column + 2], [selectedRange.end.row, selectedRange.end.column + 2]])
 
   #config functions
 
@@ -107,6 +133,3 @@ module.exports = Awiki =
     link = @fixLinkName(linkName)
     directory = @getDirectory(editor)
     return "#{directory}#{link}.wiki"
-
-  openOrCreate: (filePath) ->
-    atom.workspace.open(filePath)

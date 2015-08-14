@@ -2,8 +2,8 @@
 'context-menu':
   'atom-text-editor': [
     {
-      'label': 'Open Wiki Link'
-      'command': 'awiki:openWikiLink'
+      'label': 'Open/Create Wiki Link'
+      'command': 'awiki:openOrCreateWikiLink'
     }
   ]
 'menu': [
@@ -17,8 +17,8 @@
           'command': 'awiki:openWikiIndex'
         },
         {
-          'label': 'Open Wiki Link'
-          'command': 'awiki:openWikiLink'
+          'label': 'Open/Create Wiki Link'
+          'command': 'awiki:openOrCreateWikiLink'
         },
         {
           'label': 'Goto Last Wiki Page'

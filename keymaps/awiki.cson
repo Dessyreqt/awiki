@@ -1,0 +1,4 @@
+'atom-workspace atom-text-editor':
+  'alt-enter': 'awiki:openWikiLink'
+  'alt-backspace': 'awiki:gotoLastWikiPage'
+  'alt-w': 'awiki:openWikiIndex'

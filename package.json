@@ -1,0 +1,22 @@
+{
+  "name": "awiki",
+  "main": "./lib/awiki",
+  "version": "0.1.0",
+  "description": "A personal wiki for Atom",
+  "keywords": [
+  ],
+  "activationCommands": {
+    "atom-workspace": [
+      "awiki:openWikiIndex",
+      "awiki:openWikiLink",
+      "awiki:gotoLastWikiPage"
+    ]
+  },
+  "repository": "https://github.com/Dessyreqt/awiki",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}

@@ -1,0 +1,30 @@
+# See https://atom.io/docs/latest/hacking-atom-package-word-count#menus for more details
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Open Wiki Link'
+      'command': 'awiki:openWikiLink'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'Awiki'
+      'submenu': [
+        {
+          'label': 'Open Wiki Index'
+          'command': 'awiki:openWikiIndex'
+        },
+        {
+          'label': 'Open Wiki Link'
+          'command': 'awiki:openWikiLink'
+        },
+        {
+          'label': 'Goto Last Wiki Page'
+          'command': 'awiki:gotoLastWikiPage'
+        }
+      ]
+    ]
+  }
+]

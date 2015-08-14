@@ -1,0 +1,16 @@
+'scopeName': 'source.wiki'
+'fileTypes': [
+  'wiki',
+]
+'name': 'Awiki'
+'patterns': [
+  # links
+  {
+    'match': '\\[\\[.*?]]'
+    'name': 'string.other.link.wiki'
+  }
+  {
+    'match': '^=.*=$'
+    'name': 'markup.bold.wiki'
+  }
+]

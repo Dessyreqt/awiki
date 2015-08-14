@@ -2,11 +2,10 @@
 {TextEditor} = require 'atom'
 Os = require 'os'
 
-debugInfo = false
-
 module.exports = Awiki =
   subscriptions: null
   history: []
+  pathSeparator: null
 
   config:
     wikiLocation:
@@ -14,8 +13,8 @@ module.exports = Awiki =
       default: ''
 
   activate: (state) ->
-    if atom.config.get('awiki.wikiLocation') == ''
-      atom.config.set('awiki.wikiLocation', @getDefaultWikiPath())
+    @pathSeparator = @getPathSeparator()
+    @checkWikiPath()
 
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
     @subscriptions = new CompositeDisposable
@@ -28,8 +27,10 @@ module.exports = Awiki =
   deactivate: ->
     @subscriptions.dispose()
 
+  #features
+
   getDefaultWikiPath: ->
-    atom.packages.getPackageDirPaths() + '\\awiki\\wiki\\'
+    atom.packages.getPackageDirPaths() + "#{@pathSeparator}awiki#{@pathSeparator}wiki#{@pathSeparator}"
 
   openWikiLink: ->
     editor = atom.workspace.getActiveTextEditor()
@@ -41,45 +42,65 @@ module.exports = Awiki =
     if editor.getGrammar().scopeName is 'source.wiki'
       @history.push(editor.getPath())
       newPath = getFile(editor, link)
-      openOrCreate(newPath)
-      if debugInfo
-        atom.notifications.addInfo(newPath)
+      @openOrCreate(newPath)
 
   gotoLastWikiPage: ->
     if @history.length > 0
       newPath = @history.pop()
-      if debugInfo
-        atom.notifications.addInfo(newPath)
       atom.workspace.open(newPath)
 
   openWikiIndex: ->
+    @checkWikiPath()
     indexDirectory = atom.config.get("awiki.wikiLocation")
     indexPath = "#{indexDirectory}index.wiki"
-    if debugInfo
-      atom.notifications.addInfo(indexPath)
     atom.workspace.open(indexPath)
 
-linkUnderCursor = (editor) ->
-  cursorPosition = editor.getCursorBufferPosition()
-  link = linkAtPosition(editor, cursorPosition)
-  return link if link?
+  #config functions
 
-linkAtPosition = (editor, bufferPosition) ->
-  if token = editor.tokenForBufferPosition(bufferPosition)
-    token.value if token.value and token.scopes.indexOf('string.other.link.wiki') > -1
+  checkWikiPath: ->
+    wikiLocation = atom.config.get('awiki.wikiLocation')
 
-fixLinkName = (linkName) ->
-  linkName.replace /(\[+|]+)/g, ""
+    if wikiLocation == ''
+      atom.config.set('awiki.wikiLocation', @getDefaultWikiPath())
 
-getDirectory = (editor) ->
-  filePath = editor.getPath()
-  directory = filePath.slice(0, filePath.lastIndexOf('\\') + 1)
-  return directory
+    if wikiLocation.lastIndexOf(@pathSeparator) != wikiLocation.length - 1
+      atom.config.set('awiki.wikiLocation', "#{wikiLocation}#{@pathSeparator}")
 
-getFile = (editor, linkName) ->
-  link = fixLinkName(linkName)
-  directory = getDirectory(editor)
-  return "#{directory}#{link}.wiki"
+  #cross-platform functions
 
-openOrCreate = (filePath) ->
-  atom.workspace.open(filePath)
+  getPathSeparator: ->
+    if @isWindows()
+      return '\\'
+    return '/'
+
+  isWindows: ->
+    return Os.platform() is 'win32'
+
+  #link functions
+
+  linkUnderCursor: (editor) ->
+    cursorPosition = editor.getCursorBufferPosition()
+    link = @linkAtPosition(editor, cursorPosition)
+    return link if link?
+
+  linkAtPosition: (editor, bufferPosition) ->
+    if token = editor.tokenForBufferPosition(bufferPosition)
+      token.value if token.value and token.scopes.indexOf('string.other.link.wiki') > -1
+
+  fixLinkName: (linkName) ->
+    linkName.replace /(\[+|]+)/g, ""
+
+  #file functions
+
+  getDirectory: (editor) ->
+    filePath = editor.getPath()
+    directory = filePath.slice(0, filePath.lastIndexOf(@pathSeparator) + 1)
+    return directory
+
+  getFile: (editor, linkName) ->
+    link = @fixLinkName(linkName)
+    directory = @getDirectory(editor)
+    return "#{directory}#{link}.wiki"
+
+  openOrCreate: (filePath) ->
+    atom.workspace.open(filePath)

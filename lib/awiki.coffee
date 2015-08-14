@@ -36,12 +36,12 @@ module.exports = Awiki =
     editor = atom.workspace.getActiveTextEditor()
     return unless editor?
 
-    link = linkUnderCursor(editor)
+    link = @linkUnderCursor(editor)
     return unless link?
 
     if editor.getGrammar().scopeName is 'source.wiki'
       @history.push(editor.getPath())
-      newPath = getFile(editor, link)
+      newPath = @getFile(editor, link)
       @openOrCreate(newPath)
 
   gotoLastWikiPage: ->

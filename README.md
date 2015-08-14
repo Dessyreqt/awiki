@@ -2,13 +2,13 @@
 
 A personal wiki for Atom.
 
-This project is based on the vimwiki package for vim, and strives for, at the minimum, basic compatibility with that package, meaning you should be able to point your awiki index to your vimwiki index and it should work just fine!
+This project is based on the vimwiki package for vim, and strives for basic compatibility with that package. You should be able to point your awiki index to your vimwiki index and it should work just fine!
 
 ## Features
 
 ### Wiki index page
 
-Currently, awiki supports only one wiki, which can be specified in the settings page. Pressing `alt-w` will open your wiki's index location. This can also be accessed from the main menu under Packages/Awiki/Open Wiki index
+Awiki supports only one wiki, which can be specified in the settings page. Pressing `alt-w` will open your wiki's index location. This can also be accessed from the main menu under Packages/Awiki/Open Wiki index
 
 ### Links
 

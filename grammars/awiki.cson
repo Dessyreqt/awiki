@@ -13,4 +13,8 @@
     'match': '^=.*=$'
     'name': 'markup.bold.wiki'
   }
+  {
+    'match': '\\W(_.+?_)\\W'
+    'name': 'markup.italic.wiki'
+  }
 ]

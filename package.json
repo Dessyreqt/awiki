@@ -1,10 +1,9 @@
 {
   "name": "awiki",
   "main": "./lib/awiki",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A personal wiki for Atom",
-  "keywords": [
-  ],
+  "keywords": [],
   "activationCommands": {
     "atom-workspace": [
       "awiki:openWikiIndex",
@@ -17,6 +16,5 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

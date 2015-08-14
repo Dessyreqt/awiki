@@ -4,10 +4,6 @@ A personal wiki for Atom.
 
 This project is based on the vimwiki package for vim, and strives for, at the minimum, basic compatibility with that package, meaning you should be able to point your awiki index to your vimwiki index and it should work just fine!
 
-## Note this is probably only compatible with Windows at the moment
-
-This will be fixed as soon as possible.
-
 ## Features
 
 ### Wiki index page

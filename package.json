@@ -1,7 +1,7 @@
 {
   "name": "awiki",
   "main": "./lib/awiki",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "A personal wiki for Atom",
   "keywords": [],
   "activationCommands": {

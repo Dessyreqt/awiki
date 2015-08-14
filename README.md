@@ -16,6 +16,16 @@ Links are created by surrounding a word with a set of brackets like so:
 ```
 [[Link to another wiki page]]
 ```
+You can also create a link with a description like so:
+```
+[[destination|description of the link that will look better in HTML]]
+```
+Finally, you can also move to a different directory by employing the following:
+```
+[[..\destination|Link to a file in a parent folder]]
+[[destinationFolder\destination|Link to a file in a child folder]]
+```
+
 You can follow this link by putting the cursor on the link and hitting `alt-enter`. You can also follow it by right-clicking on it and selecting "Open Wiki Link".
 
 You can navigate back to the previous page by pressing `alt-backspace`.

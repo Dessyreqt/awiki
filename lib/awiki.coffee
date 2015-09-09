@@ -24,6 +24,7 @@ module.exports = Awiki =
     @subscriptions.add atom.commands.add 'atom-workspace', 'awiki:gotoLastWikiPage': => @gotoLastWikiPage()
     @subscriptions.add atom.commands.add 'atom-workspace', 'awiki:openWikiIndex': => @openWikiIndex()
 
+
   deactivate: ->
     @subscriptions.dispose()
 
@@ -39,10 +40,9 @@ module.exports = Awiki =
     link = @linkUnderCursor(editor)
     return unless link?
 
-    if editor.getGrammar().scopeName is 'source.wiki'
-      @history.push(editor.getPath())
-      newPath = @getFile(editor, link)
-      atom.workspace.open(newPath)
+    @history.push(editor.getPath())
+    newPath = @getFile(editor, link)
+    atom.workspace.open(newPath)
 
   gotoLastWikiPage: ->
     if @history.length > 0
@@ -58,6 +58,8 @@ module.exports = Awiki =
   openOrCreateWikiLink: ->
     editor = atom.workspace.getActiveTextEditor()
     return unless editor?
+    return unless editor.getGrammar().scopeName is 'source.wiki'
+    return if editor.hasMultipleCursors()
 
     link = @linkUnderCursor(editor)
     return @openWikiLink() if link?

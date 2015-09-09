@@ -3,7 +3,13 @@
   "main": "./lib/awiki",
   "version": "0.2.1",
   "description": "A personal wiki for Atom",
-  "keywords": [],
+  "keywords": [
+      "wiki",
+      "notes",
+      "notetaking",
+      "organizer",
+      "organiser"
+  ],
   "activationCommands": {
     "atom-workspace": [
       "awiki:openWikiIndex",

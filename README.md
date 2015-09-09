@@ -28,6 +28,6 @@ Finally, you can also move to a different directory by employing the following:
 [[destinationFolder\destination|Link to a file in a child folder]]
 ```
 
-You can follow this link by putting the cursor on the link and hitting `alt-enter`. You can also follow it by right-clicking on it and selecting "Open Wiki Link".
+You can follow this link by putting the cursor on the link and hitting `alt-enter`. You can also follow it by right-clicking on it and selecting "Open/Create Wiki Link".
 
 You can navigate back to the previous page by pressing `alt-backspace`.

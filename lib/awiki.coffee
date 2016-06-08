@@ -59,7 +59,7 @@ module.exports = Awiki =
   openOrCreateWikiLink: ->
     editor = atom.workspace.getActiveTextEditor()
     return unless editor?
-    #return unless editor.getGrammar().scopeName is 'source.wiki'
+    return unless editor.getGrammar().scopeName is 'source.wiki'
     return if editor.hasMultipleCursors()
 
     link = @linkUnderCursor(editor)

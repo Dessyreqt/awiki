@@ -1,6 +1,7 @@
 'scopeName': 'source.wiki'
 'fileTypes': [
   'wiki',
+  'md',
 ]
 'name': 'Awiki'
 'patterns': [
@@ -8,13 +9,6 @@
   {
     'match': '\\[\\[.*?]]'
     'name': 'string.other.link.wiki'
-  }
-  {
-    'match': '^=.*=$'
-    'name': 'markup.bold.wiki'
-  }
-  {
-    'match': '\\W(_.+?_)\\W'
-    'name': 'markup.italic.wiki'
-  }
+  },
+  { "include": "source.gfm" }
 ]

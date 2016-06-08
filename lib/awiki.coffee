@@ -6,6 +6,7 @@ module.exports = Awiki =
   subscriptions: null
   history: []
   pathSeparator: null
+  fileExtension:'.md'
 
   config:
     wikiLocation:
@@ -52,7 +53,7 @@ module.exports = Awiki =
   openWikiIndex: ->
     @checkWikiPath()
     indexDirectory = atom.config.get("awiki.wikiLocation")
-    indexPath = "#{indexDirectory}index.wiki"
+    indexPath = "#{indexDirectory}index#{@fileExtension}"
     atom.workspace.open(indexPath)
 
   openOrCreateWikiLink: ->
@@ -135,4 +136,4 @@ module.exports = Awiki =
   getFile: (editor, linkName) ->
     link = @fixLinkName(linkName)
     directory = @getDirectory(editor)
-    return "#{directory}#{link}.wiki"
+    return "#{directory}#{link}#{@fileExtension}"
